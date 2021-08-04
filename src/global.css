@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+
+* {
+    font-family: 'Cairo', sans-serif !important;
+}
+.v-card ,.v-data-table {
+    border-radius: 20px !important;
+
+}
+
+.bottom-sheet__card {
+    background-color:rgb(28, 28, 28) !important;
+}
+
+.bottom-sheet__bar {
+    background-color: #EEE !important;
+}
+
+.bottom-sheet {
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.171) !important;
+}
+
+.v-toast__item {
+    direction: rtl !important;
+    padding-right: 20px !important;
+}
+
+.v-btn--plain:not(.v-btn--active):not(.v-btn--loading):not(:focus):not(:hover) .v-btn__content {
+    opacity: 1 !important;
+}
+
+.v-btn {
+    letter-spacing: 0 !important;
+    font-weight: bold;
+}
+.v-navigation-drawer .v-list-item--link {
+    margin-bottom: 10px;
+    transition: 0.3s
+}
+.v-navigation-drawer .v-list-item--link:before {
+    border-radius: 40px;
+    box-shadow: 0px 0px 5px 3px #000000a1;
+    margin: 0px 10px;
+    background-color: black !important;
+}
+
+.v-navigation-drawer .v-list-item--active {
+    transform: scale(0.9);
+}
+
+div#app {
+    margin-top: 65px;
+    margin-right: 100px;
+    border-radius: 0px 50px 50px 0px;
+    box-shadow: inset -20px 0px 15px 0px #00000034;
+}
+
+body {
+    background: linear-gradient(49deg, rgb(25, 4, 89) 0%, rgb(65, 114, 198) 100%);
+}
+
+.mainContent {
+    height: calc(100vh - 65px) !important;
+    overflow: auto;
+}
+
+.v-application--wrap {
+    min-height: 0 !important;
+}
+
+.v-main {
+    padding-right: 0px !important;
+    padding-top: 0px !important;
+}
+
+.v-toolbar__title {
+    margin-right: 40px;
+}
+
+.theme--dark.v-application {
+    background: #09090983 !important;
+    color: #FFFFFF;
+}
+
+.v-overlay {
+    backdrop-filter: blur(10px) !important;
+    border-radius: 0px !important;
+    background-color: #00b3ff38 !important;
+    transition: 0.2s;
+}
+
+span.v-chip--select {
+    height: 19px !important;
+    background: #ffffff24 !important;
+    box-shadow: 0px 0px 15px 0px #00000054;
+}
