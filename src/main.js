@@ -8,7 +8,7 @@ import Dialog from 'vue-dialog-loading'
 import VueBottomSheet from "@webzlodimir/vue-bottom-sheet";
 import draggable from 'vuedraggable';
 
-let serverIp = 'localhost';
+let serverIp = '10.0.0.254';
 
 Vue.use(Dialog, {
   dialogBtnColor: '#0f0',
