@@ -195,7 +195,7 @@ export default {
       { name: "الكورس الثاني صباحي", value: 2 },
       { name: "النظام السنوي صباحي", value: 3 },
       { name: "الكورس الاول مسائي", value: 4 },
-      { name: "الكورس الاول مسائي", value: 5 },
+      { name: "الكورس الثاني مسائي", value: 5 },
       { name: "النظام السنوي مسائي", value: 6 },
     ],
     search: {
@@ -239,14 +239,17 @@ export default {
   methods: {
     performSearch() {
       this.schedules = [];
-      if (this.search.course == 3) {
-        this.search.course = 1;
+      let course = 0;
+      if (this.search.course == 1 || this.search.course == 3 || this.search.course == 4 || this.search.course == 6) {
+        course = 1;
+      } else {
+        course = 2;
       }
       this.$loading.show({ delay: 0 });
       this.$http
         .get(
           this.$baseUrl +
-            `lessons?sectionId=${this.userInfo.perv}&course=${this.search.course}&year=${this.userInfo.currentYear}`
+            `lessons?sectionId=${this.userInfo.perv}&course=${course}&year=${this.userInfo.currentYear}`
         )
         .then((res) => {
           this.lessons[0] = res.data
