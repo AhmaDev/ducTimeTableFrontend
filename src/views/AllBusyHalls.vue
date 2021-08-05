@@ -1,5 +1,5 @@
 <template>
-  <div id="busyHalls" class="pa-10">
+  <div id="allBusyHalls" class="pa-10">
     <v-app-bar color="transparent" elevation="0" app>
       <v-toolbar-title>جدول الاشغال</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -60,7 +60,7 @@ import "table2excel";
 import TableToExcel from "@linways/table-to-excel";
 
 export default {
-  name: "BusyHalls",
+  name: "AllBusyHalls",
   data: () => ({
     searchData: null,
     timetable: [],
@@ -77,12 +77,15 @@ export default {
         let lessonName = this.lessons.filter(
           (x) => x.id == lesson[0].lessonId
         )[0];
+        console.log(lessonName);
         if (lessonName != undefined) {
           return (
             lessonName.name +
-            "<br> المرحلة " +
+            "<br><hr> " +
+            lessonName.sectionName +
+            "<br><hr> المرحلة " +
             this.getLevelName(lessonName.level) +
-            "<br> الشعبة : " +
+            "<br><hr> الشعبة : " +
             lesson[0].classRoom
           );
         }
@@ -128,7 +131,7 @@ export default {
     this.$http
       .get(
         this.$baseUrl +
-          `lessons?sectionId=${this.userInfo.perv}&year=${this.userInfo.currentYear}`
+          `lessons?year=${this.userInfo.currentYear}`
       )
       .then((res) => {
         this.lessons = res.data;
@@ -141,15 +144,13 @@ export default {
     this.searchData = this.$store.getters.getSelectedLevel;
     console.log(this.searchData);
     this.$http
-      .get(this.$timeTableBaseUrl + "timetable/halls/" + this.userInfo.perv)
+      .get(this.$timeTableBaseUrl + "timetable/halls")
       .then((res) => {
         this.halls = res.data;
         this.$http
           .get(
             this.$timeTableBaseUrl +
-              "timetable/schedules/" +
-              this.userInfo.perv +
-              "/" +
+              "timetable/allSchedules/" +
               this.userInfo.currentYear +
               "/" +
               this.searchData.course
@@ -159,7 +160,7 @@ export default {
             res.data.forEach((level) => {
               level.schedule.forEach((scheduleInfo) => {
                 scheduleInfo.level = level.levelData.level.value;
-                scheduleInfo.hallName = this.getHallName(scheduleInfo.hallId)
+                scheduleInfo.hallName = this.getHallName(scheduleInfo.hallId) 
               });
               allSchedules.push(...level.schedule);
             });
@@ -180,8 +181,8 @@ export default {
 </script>
 
 <style>
-#busyHalls td,
-#busyHalls th {
+#allBusyHalls td,
+#allBusyHalls th {
   border: 1px rgb(103, 103, 103) solid;
   border-spacing: 0;
   margin: 0;
@@ -196,11 +197,11 @@ export default {
   text-align: center;
 }
 
-#busyHalls tbody {
+#allBusyHalls tbody {
   border-bottom: 2px red solid;
 }
 
-#busyHalls table {
+#allBusyHalls table {
   border-collapse: collapse;
 }
 </style>

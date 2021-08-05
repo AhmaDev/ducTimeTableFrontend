@@ -5,7 +5,22 @@
       <v-spacer></v-spacer>
       <v-toolbar-title>عدد القاعات : {{ halls.length }}</v-toolbar-title>
       <v-spacer v-if="schedules.length > 0"></v-spacer>
-      <v-btn v-if="schedules.length > 0" color="success" @click="goToBusyHalls()"> جدول الاشغال </v-btn>
+      <v-btn
+        v-if="schedules.length > 0"
+        color="success"
+        @click="goToBusyHalls()"
+      >
+        جدول الاشغال
+      </v-btn>
+      &nbsp;
+      &nbsp;
+      <v-btn
+        v-if="schedules.length > 0"
+        color="success"
+        @click="goToAllBusyHalls()"
+      >
+        جدول الاشغال لكل الجامعة
+      </v-btn>
     </v-app-bar>
 
     <v-row>
@@ -75,7 +90,11 @@
     </center>
 
     <v-row v-if="schedules.length > 0">
-      <v-col :cols="getColsNumber()" v-for="schedule in schedules" :key="schedule.idSchedule">
+      <v-col
+        :cols="getColsNumber()"
+        v-for="schedule in schedules"
+        :key="schedule.idSchedule"
+      >
         <v-card class="pa-10">
           {{ levels.filter((x) => x.value == schedule.level)[0].name }}
           <br />
@@ -90,18 +109,26 @@
               >{{ classRoom }}</v-chip
             >
           </v-slide-group>
-          <br>
-          <v-btn @click="goToSchedule(schedule)" style="float: left" color="primary">
+          <br />
+          <v-btn
+            @click="goToSchedule(schedule)"
+            style="float: left"
+            color="primary"
+          >
             تعديل
           </v-btn>
-          <br>
+          <br />
         </v-card>
       </v-col>
     </v-row>
 
     <div :key="forceRender">
       <v-row v-if="lessons.length > 0">
-        <v-col :cols="getColsNumber()" v-for="(level, index) in levels" :key="level.value">
+        <v-col
+          :cols="getColsNumber()"
+          v-for="(level, index) in levels"
+          :key="level.value"
+        >
           <template v-if="lessons[index].length > 0">
             <v-simple-table
               fixed-header
@@ -240,7 +267,12 @@ export default {
     performSearch() {
       this.schedules = [];
       let course = 0;
-      if (this.search.course == 1 || this.search.course == 3 || this.search.course == 4 || this.search.course == 6) {
+      if (
+        this.search.course == 1 ||
+        this.search.course == 3 ||
+        this.search.course == 4 ||
+        this.search.course == 6
+      ) {
         course = 1;
       } else {
         course = 2;
@@ -301,6 +333,11 @@ export default {
       this.$store.commit("setSelectedLevel", this.search);
       this.$router.push("/busyHalls");
     },
+    goToAllBusyHalls() {
+      this.forceRender++;
+      this.$store.commit("setSelectedLevel", this.search);
+      this.$router.push("/allBusyHalls");
+    },
     goToSchedule(schedule) {
       this.selectedLevel = schedule.levelData;
       this.forceRender++;
@@ -309,11 +346,11 @@ export default {
     },
     getColsNumber() {
       if (this.lessons[4].length > 0) {
-        return 0
+        return 0;
       } else {
-        return 3
+        return 3;
       }
-    }
+    },
   },
   created: function () {
     this.$http
